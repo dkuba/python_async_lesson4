@@ -1,4 +1,6 @@
 import asyncio
+import json
+
 import config
 import logging
 
@@ -13,9 +15,14 @@ async def chat_writer(message):
     data = await reader.readline()
     logger.debug(data.decode("utf-8"))
 
-    writer.write(str(config.CHAT_TOKEN + '\n').encode())
+    writer.write(str(config.CHAT_TOKEN + '1\n').encode())
 
     data = await reader.readline()
+
+    if not json.loads(data.decode("utf-8")):
+        print('введен неверный токен')
+        return
+
     logger.debug(data.decode("utf-8"))
     data = await reader.readline()
     logger.debug(data.decode("utf-8"))
