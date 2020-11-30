@@ -8,8 +8,8 @@ import config
 
 
 async def chat_reader():
-    reader, _ = await asyncio.open_connection(config.app_config[config.HOST],
-                                              config.app_config[config.PORT])
+    reader, _ = await asyncio.open_connection(config.app_config[config.CHAT_HOST],
+                                              config.app_config[config.CHAT_PORT])
     try:
         while True:
             async with aiofiles.open(config.app_config[config.FILE_PATH], mode='a') as f:
@@ -27,8 +27,8 @@ if __name__ == '__main__':
     parser.add_argument('--history', type=str, default='minechat.history', help='History file path', dest='history')
     args = parser.parse_args()
 
-    config.app_config[config.HOST] = args.host
-    config.app_config[config.PORT] = args.port
+    config.app_config[config.CHAT_HOST] = args.host
+    config.app_config[config.CHAT_PORT] = args.port
     config.app_config[config.FILE_PATH] = args.history
 
     try:
