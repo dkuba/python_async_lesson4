@@ -84,5 +84,5 @@ async def main(nickname, message):
     await submit_message(message)
 
 if __name__ == '__main__':
-    asyncio.run(main('David', '!!!HELLO!!!'))
+    asyncio.run(main('David\n', '!!!HELLO!!!\n'))
 
