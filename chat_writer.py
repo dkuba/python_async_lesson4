@@ -6,6 +6,10 @@ import os
 import config
 import logging
 
+from dotenv import load_dotenv
+CHAT_TOKEN = ''
+
+load_dotenv()
 
 logger = logging.getLogger(__file__)
 logging.basicConfig(level=logging.DEBUG)
@@ -25,7 +29,7 @@ async def register(nickname):
     writer.write(f'{nickname}\n'.encode())
 
     data = await reader.readline()
-    os.environ[config.CHAT_TOKEN] = json.loads(data.decode("utf-8"))["account_hash"]
+    os.environ[CHAT_TOKEN] = json.loads(data.decode("utf-8"))["account_hash"]
 
     logger.debug(data.decode("utf-8"))
     data = await reader.readline()
@@ -41,7 +45,7 @@ async def authorise():
     data = await reader.readline()
     logger.debug(data.decode("utf-8"))
 
-    writer.write(str(os.environ[config.CHAT_TOKEN] + '\n').encode())
+    writer.write(str(os.environ[CHAT_TOKEN] + '\n').encode())
 
     data = await reader.readline()
 
@@ -60,7 +64,7 @@ async def submit_message(message):
     data = await reader.readline()
     logger.debug(data.decode("utf-8"))
 
-    writer.write(str(os.getenv(config.CHAT_TOKEN) + '\n').encode())
+    writer.write(str(os.getenv(CHAT_TOKEN) + '\n').encode())
 
     data = await reader.readline()
     if not json.loads(data.decode("utf-8")):
@@ -99,11 +103,9 @@ if __name__ == '__main__':
 
     os.environ[config.CHAT_HOST] = args.host
     os.environ[config.CHAT_PORT] = str(args.port)
-    os.environ[config.CHAT_TOKEN] = args.token
+    os.environ[CHAT_TOKEN] = args.token
     os.environ[config.CHAT_USER_NAME] = args.username
     os.environ[config.CHAT_MESSAGE] = args.message
-
-    print('port=', args.port, ';', os.getenv(config.CHAT_HOST))
 
     asyncio.run(main())
 
