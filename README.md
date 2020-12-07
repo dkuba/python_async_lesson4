@@ -9,19 +9,19 @@ Key features:
 
 1. just run "pip install -r requirements.txt" in you venv
 
-###Usage
+### Usage
 
-#####Chat reader
+##### Chat reader
 Default host is 'minechat.dvmn.org' and port is '5000'. Default
 log file name is 'minechat.history'  
 
     >>> python3 chat_reader.py
 
-#####Chat writer
+##### Chat writer
 Default host is 'minechat.dvmn.org' and port is '5050'. By default chat token
 is got from os environment variable CHAT_TOKEN   
 
     >>> python3 chat_writer.py
 
-###Help
+### Help
 Use --help arg to see available configuration args
